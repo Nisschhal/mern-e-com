@@ -15,7 +15,6 @@ router.get(
     } else {
       res.json({ message: "No Product in DB!!" });
     }
-    res.json(products);
   })
 );
 
@@ -30,7 +29,8 @@ router.get(
     if (product) {
       res.json(product);
     } else {
-      res.json({ message: "No Product Found!!" });
+      res.status(404);
+      throw new Error("No Product Found!!");
     }
   })
 );

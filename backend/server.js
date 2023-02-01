@@ -16,11 +16,6 @@ app.use(cors());
 
 app.use("/api/products", productRoute);
 
-app.use((err, req, res, next) => {
-  const statusCode = res.statusCode == 200 ? 500 : res.statusCode;
-  res.status(statusCode).json({ message: err.message, stack: err.stack });
-});
-
 // ERROR HANDLER MIDDLEWARE
 app.use(notFound);
 app.use(errorHandler);

@@ -9,3 +9,12 @@ Learning New Things:
 React-bootstrap
 <ListGroup> takes the list item. #variant='flush' removes the top and sides border
 	<ListGroup.Item> takes the item of in that list group
+
+
+
+/////////////////// -------------- REDUX (REACT-REDUX)
+{createStore, combineReducers, applyMiddler} is needed from "redux" package to create store, combine reducers for different state, and apply thunk middleware from 'redux-thunk'
+import {composeWithDevTools} from 'redux-devtools-extension' from chrome extension
+
+
+
