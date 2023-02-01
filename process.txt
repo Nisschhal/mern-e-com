@@ -1,0 +1,11 @@
+Learning New Things:
+1. react-bootstrap is similar to normal bootstrap but with extra handles on it.
+2. props Default Type and valu can be defined into component
+			ComponentName.defaultProps = {
+				styleAttributeName: "value",
+				color: "#f8e825",
+			};
+
+React-bootstrap
+<ListGroup> takes the list item. #variant='flush' removes the top and sides border
+	<ListGroup.Item> takes the item of in that list group
