@@ -4,6 +4,8 @@ import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
 import axios from "axios";
 import { listproducts } from "../store/actions/productAction";
+import Message from "../components/Message";
+import Loading from "../components/Loading";
 const HomeScreen = () => {
   // const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
@@ -25,9 +27,9 @@ const HomeScreen = () => {
     <>
       <h1>Latest Products</h1>
       {loading ? (
-        <h2>Loading</h2>
+        <Loading />
       ) : error ? (
-        <h3>{error}</h3>
+        <Message variant="danger">{error}</Message>
       ) : (
         <Row>
           {products.map((product) => (
