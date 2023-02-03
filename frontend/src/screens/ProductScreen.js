@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Image, Row, Col, ListGroup, Form } from "react-bootstrap";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Rating from "../components/Rating";
 import axios from "axios";
 import { listproductdetails } from "../store/actions/productAction";
@@ -9,11 +9,12 @@ import Loading from "../components/Loading";
 import Message from "../components/Message";
 
 const ProductScreen = () => {
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
   const { loading, product, error } = productDetail;
   const { id } = useParams();
+  const nav = useNavigate();
   // const [product, setProduct] = useState({});
   useEffect(() => {
     // const fetchProductById = async () => {
@@ -25,6 +26,10 @@ const ProductScreen = () => {
     dispatch(listproductdetails(id));
     // fetchProductById();
   }, [dispatch, id]);
+
+  const addToCartHandler = async () => {
+    nav(`/cart/${id}?qty=${qty}`);
+  };
 
   return (
     <>
@@ -98,6 +103,7 @@ const ProductScreen = () => {
               <ListGroup.Item>
                 <Row>
                   <Button
+                    onClick={addToCartHandler}
                     className="btn btn-block"
                     type="button"
                     disabled={product.countInStock === 0}

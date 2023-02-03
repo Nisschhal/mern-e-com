@@ -5,14 +5,20 @@ import {
   productListReducer,
   productDetailsReducer,
 } from "./reducers/productReducer";
+import { cartReducer } from "./reducers/cartReducers";
 // STATE AND ITS VALUES
 const reducers = combineReducers({
   productList: productListReducer,
   productDetail: productDetailsReducer,
+  cart: cartReducer,
 });
 
+const cartFromStorage = localStorage.getItem("cartItems")
+  ? JSON.parse(localStorage.getItem("cartItems"))
+  : [];
+
 // INITAL STATE
-const initalState = {};
+const initalState = { cart: { cartItems: "hello" } };
 
 // redux-thunk MIDDLEWARE FOR DEDUX DEVTOOL
 const middleware = [thunk];
