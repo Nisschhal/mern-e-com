@@ -18,7 +18,7 @@ const cartFromStorage = localStorage.getItem("cartItems")
   : [];
 
 // INITAL STATE
-const initalState = { cart: { cartItems: "hello" } };
+const initalState = { cart: { cartItems: cartFromStorage } };
 
 // redux-thunk MIDDLEWARE FOR DEDUX DEVTOOL
 const middleware = [thunk];

@@ -10,7 +10,7 @@ import {
 export const cartReducer = (state = { cartItems: [] }, action) => {
   switch (action.type) {
     case CART_ADD_REQUEST:
-      return { loading: true, cartItems: [] };
+      return { loading: true, cartItems: [...state.cartItems] };
 
     case CART_ADD_SUCCESS:
       const item = action.payload;
@@ -43,13 +43,34 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       }
 
     case CART_ADD_FAIL:
-      return { loading: false, error: action.payload };
+      return {
+        loading: false,
+        error: action.payload,
+        cartItems: [...state.cartItems],
+      };
     case CART_REMOVE_REQUEST:
-      return { loading: true, cartItems: [] };
+      return { loading: true, cartItems: [...state.cartItems] };
     case CART_REMOVE_SUCCESS:
-      return { loading: false, cartItems: action.payload };
+      // const newCartItems = ;
+      // if product found in the cart items find and update it with new item with same product Id
+      return {
+        ...state,
+        loading: false,
+        // map through all item if product id match then update it with same product but differnt qty and price, mabye
+        // if product id doesn't match then do nothing to that item
+        cartItems: [
+          ...state.cartItems.filter(
+            (cartItem) => cartItem.product !== action.payload
+          ),
+        ],
+      };
+
     case CART_REMOVE_FAIL:
-      return { loading: false, error: action.payload };
+      return {
+        loading: false,
+        error: action.payload,
+        cartItems: [...state.cartItems],
+      };
     default:
       return state;
   }
