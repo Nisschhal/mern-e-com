@@ -6,8 +6,11 @@ const connectDB = require("./config/db");
 require("dotenv").config();
 require("colors");
 const productRoute = require("./routes/productRoutes");
+const userRoute = require("./routes/userRoutes.js");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
+// JSON DATA PARSER TO DB
+app.use(express.json());
 // DB CONNECTION
 connectDB();
 
@@ -15,6 +18,7 @@ connectDB();
 app.use(cors());
 
 app.use("/api/products", productRoute);
+app.use("/api/users", userRoute);
 
 // ERROR HANDLER MIDDLEWARE
 app.use(notFound);
