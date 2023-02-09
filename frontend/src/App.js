@@ -5,6 +5,8 @@ import HomeScreen from "./screens/HomeScreen";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
+import LoginScreen from "./screens/loginScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 function App() {
   return (
     <>
@@ -13,9 +15,11 @@ function App() {
         <Container>
           <h1>Welcome to ProShop</h1>
           <Routes>
+            <Route path="/login" element={<LoginScreen />} />
             <Route path="/" element={<HomeScreen />} />
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/cart/:id?" element={<CartScreen />} />
+            <Route path="/profile" element={<ProfileScreen />} />
           </Routes>
         </Container>
       </main>

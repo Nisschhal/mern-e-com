@@ -22,7 +22,6 @@ const userLogin = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      password: user.password,
       token: generateToken(user._id),
     });
   } else {
@@ -86,4 +85,30 @@ const getUserProfile = asyncHandler(async (req, res) => {
   //   res.json({ email: email, password: password });
 });
 
-module.exports = { userLogin, userSignup, getUserProfile, getUsers };
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  const { name, email } = req.body;
+  if (!name || !email) {
+    res.status(403);
+    throw new Error("Please enter valid name or email detail");
+  }
+  if (user) {
+    user.name = name;
+    user.email = email;
+  }
+  const updatedUser = user.save();
+  res.json({
+    _id: updatedUser._id,
+    name: updatedUser.name,
+    email: updatedUser.name,
+    isAdmin: updatedUser.isAdmin,
+  });
+});
+
+module.exports = {
+  userLogin,
+  userSignup,
+  getUserProfile,
+  getUsers,
+  updateUserProfile,
+};
