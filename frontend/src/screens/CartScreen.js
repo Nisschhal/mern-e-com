@@ -1,36 +1,28 @@
-import React, { useEffect } from "react";
-import {
-  Link,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
-import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Form,
-  Button,
-  Card,
-} from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import Message from "../components/Message";
-import Loading from "../components/Loading";
-import { addToCart, removeFromCart } from "../store/actions/cartAction";
+import React, { useEffect } from "react"
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom"
+import { Row, Col, ListGroup, Image, Form, Button, Card } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import Message from "../components/Message"
+import Loading from "../components/Loading"
+import { addToCart, removeFromCart } from "../store/actions/cartAction"
 const CartScreen = () => {
-  const { id } = useParams();
-  const [search] = useSearchParams();
-  const qty = search ? search.get("qty") : 1;
-  console.log(qty);
+  const { id } = useParams()
+  const [search] = useSearchParams()
+  const qty = search ? search.get("qty") : 1
+  console.log(qty)
 
-  const dispatch = useDispatch();
-  const { cartItems } = useSelector((state) => state.cart);
-  console.log(cartItems);
+  const dispatch = useDispatch()
+  const { cartItems } = useSelector((state) => state.cart)
+  console.log(cartItems)
 
   useEffect(() => {
-    if (id) dispatch(addToCart(id, qty));
-  }, [dispatch, id, qty]);
+    if (id) dispatch(addToCart(id, qty))
+  }, [dispatch, id, qty])
+  const nav = useNavigate()
+
+  const toShippingHandler = () => {
+    nav("/shipping")
+  }
   return (
     <Row>
       <Col md={8}>
@@ -58,7 +50,7 @@ const CartScreen = () => {
                       onChange={(e) => {
                         dispatch(
                           addToCart(item.product, Number(e.target.value))
-                        );
+                        )
                       }}
                     >
                       {[...Array(item.countInStock).keys()].map((q) => (
@@ -95,7 +87,11 @@ const CartScreen = () => {
           </ListGroup.Item>
           <ListGroup.Item>
             <Row>
-              <Button type="button" className="btn-block">
+              <Button
+                type="button"
+                onClick={toShippingHandler}
+                className="btn-block"
+              >
                 Proceed To Checkout
               </Button>
             </Row>
@@ -103,7 +99,7 @@ const CartScreen = () => {
         </ListGroup>
       </Col>
     </Row>
-  );
-};
+  )
+}
 
-export default CartScreen;
+export default CartScreen

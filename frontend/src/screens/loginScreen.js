@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { Link, redirect, useNavigate, useSearchParams } from "react-router-dom";
-import { Form, Row, Col, Button } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import Message from "../components/Message";
-import Loading from "../components/Loading";
-import FormContainer from "../components/FormContainer";
-import { login } from "../store/actions/userAction";
+import React, { useState, useEffect } from "react"
+import { Link, redirect, useNavigate, useSearchParams } from "react-router-dom"
+import { Form, Row, Col, Button } from "react-bootstrap"
+import { useSelector, useDispatch } from "react-redux"
+import Message from "../components/Message"
+import Loading from "../components/Loading"
+import FormContainer from "../components/FormContainer"
+import { login } from "../store/actions/userAction"
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState("");
-  const [search] = useSearchParams();
-  const nav = useNavigate();
+  const [email, setEmail] = useState("")
+  const [search] = useSearchParams()
+  const nav = useNavigate()
 
-  const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
-  const { loading, userInfo, error } = useSelector((state) => state.userLogin);
+  const [password, setPassword] = useState("")
+  const dispatch = useDispatch()
+  const { loading, userInfo, error } = useSelector((state) => state.userLogin)
 
   {
-    console.log(search);
+    console.log(search)
   }
 
   //   const redirect = (search && search.split("=")[1]) || "/";
 
   const submitForm = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     // disptach login
     try {
-      dispatch(login(email, password));
-      userInfo && nav("/");
+      dispatch(login(email, password))
+      nav("/")
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   return (
     <FormContainer>
@@ -66,13 +66,13 @@ const LoginScreen = () => {
         <Col>New Customer?</Col>
         <Link
           //   to={(redirect && `/register?redirect=${redirect}`) || "/register"}
-          to={"/register"}
+          to={"/signup"}
         >
           Register
         </Link>
       </Row>
     </FormContainer>
-  );
-};
+  )
+}
 
-export default LoginScreen;
+export default LoginScreen

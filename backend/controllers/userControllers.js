@@ -52,15 +52,12 @@ const userSignup = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      password: user.password,
       token: generateToken(user._id),
     });
   } else {
     res.status(400);
     throw new Error("Invalid User Data!!");
   }
-
-  res.json({ email: email, password: password });
 });
 
 // @dec GET user profile
@@ -73,7 +70,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     res.json({
       _id: user._id,
       name: user.name,
-      email: user.name,
+      email: user.email,
       isAdmin: user.isAdmin,
     });
   } else {

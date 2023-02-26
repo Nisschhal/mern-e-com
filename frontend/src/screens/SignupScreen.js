@@ -5,9 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import Message from "../components/Message";
 import Loading from "../components/Loading";
 import FormContainer from "../components/FormContainer";
-import { getUser, login, update } from "../store/actions/userAction";
+import { login, signpu, update } from "../store/actions/userAction";
 
-const ProfileScreen = () => {
+const SignupScreen = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -17,25 +17,7 @@ const ProfileScreen = () => {
   const nav = useNavigate();
 
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.userLogin);
-  const [updated, setUpdated] = useState(false);
-  const { loading, user, error } = useSelector((state) => state.userDetails);
-  console.log(user);
-
-  useEffect(() => {
-    setUpdated(false);
-    if (!userInfo) {
-      nav("/login");
-    } else {
-      if (!user.name) {
-        dispatch(getUser("profile"));
-      } else {
-        setName(user.name);
-        setEmail(user.email);
-      }
-    }
-    console.log(user);
-  }, [user]);
+  const { loading, userInfo, error } = useSelector((state) => state.userSignup);
 
   {
     console.log(search);
@@ -47,34 +29,30 @@ const ProfileScreen = () => {
     e.preventDefault();
     // disptach login
     try {
-      if (password !== confirmpassword && name && email) {
+      if (password !== confirmpassword) {
         return;
       }
+      console.log(email, name, password);
+      console.log(error);
 
-      dispatch(update(email, name));
-      setUpdated(true);
+      dispatch(signpu(email, name, password));
+      nav("/");
     } catch (err) {
-      console.log(err);
+      console.log(err.Message);
     }
   };
 
   return (
-    <Row>
-      <Col md={3}>
-        <h1>Update Profile</h1>
+    <Row className="justify-content-center">
+      <Col md={6} sm={12}>
+        <h1>SIGN UP</h1>
         {error && <Message variant={"danger"}>{error}</Message>}
         {loading && <Loading />}
-        {updated && (
-          <Message variant={"success"}>
-            {"Profile Updated Successfully!"}
-          </Message>
-        )}
         <Form onSubmit={submitForm}>
           <Form.Group controlId="name" className="py-2">
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="name"
-              value={name}
               placeholder="Enter you Name"
               onChange={(e) => setName(e.target.value)}
             ></Form.Control>
@@ -83,7 +61,6 @@ const ProfileScreen = () => {
             <Form.Label>Email Address</Form.Label>
             <Form.Control
               type="email"
-              value={email}
               placeholder="test@gmail.com"
               onChange={(e) => setEmail(e.target.value)}
             ></Form.Control>
@@ -93,7 +70,6 @@ const ProfileScreen = () => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              value={password}
               placeholder="Enter Password"
               onChange={(e) => setPassword(e.target.value)}
             ></Form.Control>
@@ -103,22 +79,18 @@ const ProfileScreen = () => {
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               type="password"
-              value={confirmpassword}
               placeholder="Confirm Password"
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
           <Button type="submit" variant="primary">
-            Update Profile{" "}
+            Register
           </Button>
         </Form>
-      </Col>
-      <Col md={9}>
-        <h1>My Orders</h1>
       </Col>
     </Row>
   );
 };
 
-export default ProfileScreen;
+export default SignupScreen;
