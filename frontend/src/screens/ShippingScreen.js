@@ -4,8 +4,11 @@ import { useDispatch, useSelector } from "react-redux"
 import Loading from "../components/Loading"
 import Message from "../components/Message"
 import { saveShippingAddress } from "../store/actions/shippingAction"
+import CheckOutSteps from "../components/CheckOutSteps"
+import { useNavigate } from "react-router-dom"
 
 const ShippingScreen = () => {
+  const nav = useNavigate()
   const defaultShippingFields = {
     address: "",
     city: "",
@@ -31,14 +34,11 @@ const ShippingScreen = () => {
   // submit handler
   const submitForm = (e) => {
     e.preventDefault()
-    console.log("woker")
     dispatch(saveShippingAddress(address, city, postalCode, country))
-    console.log(shippingInfo)
   }
 
   return (
     <Row className="container">
-      <h1>SHIPPING Details</h1>
       <Row className="justify-content-md-center">
         <Col md={6}>
           {error && <Message variant={"danger"}>{error}</Message>}
@@ -48,6 +48,8 @@ const ShippingScreen = () => {
                 {"Profile Updated Successfully!"}
               </Message>
             )} */}
+          <CheckOutSteps step1 step2 />
+          <h1>Shipping</h1>
           <Form onSubmit={submitForm}>
             <Form.Group controlId="address" className="py-2">
               <Form.Label>Address</Form.Label>
@@ -92,7 +94,11 @@ const ShippingScreen = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Button type="submit" variant="primary">
+            <Button
+              type="submit"
+              variant="primary"
+              onClick={() => nav("/payment")}
+            >
               CONTINUE
             </Button>
           </Form>
