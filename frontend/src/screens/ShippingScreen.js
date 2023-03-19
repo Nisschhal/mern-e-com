@@ -35,6 +35,8 @@ const ShippingScreen = () => {
   const submitForm = (e) => {
     e.preventDefault()
     dispatch(saveShippingAddress(address, city, postalCode, country))
+    nav("/payment")
+    console.log("working")
   }
 
   return (
@@ -97,7 +99,7 @@ const ShippingScreen = () => {
             <Button
               type="submit"
               variant="primary"
-              onClick={() => nav("/payment")}
+              // onClick={() => nav("/payment")}
             >
               CONTINUE
             </Button>

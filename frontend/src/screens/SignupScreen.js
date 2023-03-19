@@ -1,46 +1,46 @@
-import React, { useState, useEffect } from "react";
-import { Link, redirect, useNavigate, useSearchParams } from "react-router-dom";
-import { Form, Row, Col, Button } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import Message from "../components/Message";
-import Loading from "../components/Loading";
-import FormContainer from "../components/FormContainer";
-import { login, signpu, update } from "../store/actions/userAction";
+import React, { useState, useEffect } from "react"
+import { Link, redirect, useNavigate, useSearchParams } from "react-router-dom"
+import { Form, Row, Col, Button } from "react-bootstrap"
+import { useSelector, useDispatch } from "react-redux"
+import Message from "../components/Message"
+import Loading from "../components/Loading"
+import FormContainer from "../components/FormContainer"
+import { login, signpu, update } from "../store/actions/userAction"
 
 const SignupScreen = () => {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmpassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState("")
+  const [name, setName] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmpassword, setConfirmPassword] = useState("")
 
-  const [search] = useSearchParams();
-  const nav = useNavigate();
+  const [search] = useSearchParams()
+  const nav = useNavigate()
 
-  const dispatch = useDispatch();
-  const { loading, userInfo, error } = useSelector((state) => state.userSignup);
+  const dispatch = useDispatch()
+  const { loading, userInfo, error } = useSelector((state) => state.userSignup)
 
   {
-    console.log(search);
+    console.log(search)
   }
 
   //   const redirect = (search && search.split("=")[1]) || "/";
 
   const submitForm = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     // disptach login
     try {
       if (password !== confirmpassword) {
-        return;
+        return
       }
-      console.log(email, name, password);
-      console.log(error);
+      console.log(email, name, password)
+      console.log(error)
 
-      dispatch(signpu(email, name, password));
-      nav("/");
+      dispatch(signpu(email, name, password))
+      nav("/")
     } catch (err) {
-      console.log(err.Message);
+      console.log(err.Message)
     }
-  };
+  }
 
   return (
     <Row className="justify-content-center">
@@ -90,7 +90,7 @@ const SignupScreen = () => {
         </Form>
       </Col>
     </Row>
-  );
-};
+  )
+}
 
-export default SignupScreen;
+export default SignupScreen

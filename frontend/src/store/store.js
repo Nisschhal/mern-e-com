@@ -12,6 +12,7 @@ import {
   userSignupReducer,
 } from "./reducers/userReducers"
 import shippingReducers from "./reducers/shippingReducers"
+import PaymentMethodReducer from "./reducers/paymentMethodReducer"
 // STATE AND ITS VALUES
 const reducers = combineReducers({
   productList: productListReducer,
@@ -21,6 +22,7 @@ const reducers = combineReducers({
   userSignup: userSignupReducer,
   userDetails: userDetailReducer,
   shipping: shippingReducers,
+  payment: PaymentMethodReducer,
 })
 
 const cartFromStorage = localStorage.getItem("cartItems")

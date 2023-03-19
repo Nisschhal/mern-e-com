@@ -4,8 +4,6 @@ import {
   PAYMENT_METHOD_FAIL,
 } from "../constant"
 
-import React from "react"
-
 const PaymentMethodReducer = (state = { paymentMethod: "" }, action) => {
   switch (action.type) {
     case PAYMENT_METHOD_REQUEST:

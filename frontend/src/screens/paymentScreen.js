@@ -18,7 +18,7 @@ const PaymentScreen = () => {
   )
 
   if (!shippingInfo) {
-    nav.push("/shipping")
+    nav("/shipping")
   }
 
   const [paymentMethod, setPaymentMethod] = useState("PayPal")
@@ -28,7 +28,7 @@ const PaymentScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(savePaymentMethod(paymentMethod))
-    nav.push("/placeorder")
+    nav("/placeorder")
   }
 
   return (
@@ -45,17 +45,23 @@ const PaymentScreen = () => {
               id="PayPal"
               name="paymentmethod"
               value="Paypal"
-              checked
-              onChange={(e) => setPaymentMethod(e.target.value)}
+              checked={paymentMethod === "Paypal"}
+              onChange={(e) => {
+                setPaymentMethod(e.target.value)
+                console.log(e.target.value)
+              }}
             ></Form.Check>
             <Form.Check
               type="radio"
               label="Stripe"
               id="stipe"
               name="paymentmethod"
-              value="sripe"
-              checked
-              onChange={(e) => setPaymentMethod(e.target.value)}
+              value="Stripe"
+              checked={paymentMethod === "Stripe"}
+              onChange={(e) => {
+                setPaymentMethod(e.target.value)
+                console.log(e.target.value)
+              }}
             ></Form.Check>
           </Col>
         </Form.Group>
@@ -63,7 +69,7 @@ const PaymentScreen = () => {
           className="mt-3"
           type="submit"
           variant="primary"
-          onClick={() => nav("/payment")}
+          // onClick={() => nav("/payment")}
         >
           CONTINUE
         </Button>
